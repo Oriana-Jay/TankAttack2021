@@ -39,11 +39,13 @@ public class TankCtrl : MonoBehaviour
 
             tr.Translate(Vector3.forward * Time.deltaTime * speed * v);
             tr.Rotate(Vector3.up * Time.deltaTime * 100.0f * h);
+
+            Fire();
         }
     }
 
     void Fire()
     {
-
+        Instantiate(cannon, firePos.position, firePos.rotation);
     }
 }
