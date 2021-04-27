@@ -29,6 +29,21 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log($"code={returnCode}, msg={message}");
+        // 룸을 생성
+        PhotonNetwork.CreateRoom("My Room");
+    }
+
+    // 룸 생성 완료 콜백
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("방생성 완료");
+    }
+
+    // 룸에 입장했을 때 호출되는 콜백함수
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("방 입장 완료");
+        Debug.Log(PhotonNetwork.CurrentRoom.Name);
     }
 
 }
