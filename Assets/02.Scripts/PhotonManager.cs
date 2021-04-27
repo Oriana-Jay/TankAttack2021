@@ -9,20 +9,27 @@ using UnityEngine.UI;
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     private readonly string gameVersion = "v1.0";
-    private string UserId = "Zackiller";
+    private string userId = "Zackiller";
 
-    public TMP_InputField userId;
-    public TMP_InputField roomName;
+    public TMP_InputField userIdText;
+    public TMP_InputField roomNameText;
 
     void Awake()
     {
         // 게임 버전 지정
         PhotonNetwork.GameVersion = gameVersion;
         // 유저명 지정
-        PhotonNetwork.NickName = UserId;
+        //PhotonNetwork.NickName = userId;
 
         // 서버접속
         PhotonNetwork.ConnectUsingSettings();        
+    }
+
+    void Start()
+    {
+        userId = PlayerPrefs.GetString("USER_ID", $"USER_{Random.Range(0, 100):00}");
+        userIdText.text = userId;
+        PhotonNetwork.NickName = userId;
     }
 
     public override void OnConnectedToMaster()
@@ -69,5 +76,18 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Tank",
                                   new Vector3(0, 5.0f, 0),
                                   Quaternion.identity, 0);
+    }
+
+    public void OnLoginClick()
+    {
+        if (string.IsNullOrEmpty(userIdText.text))
+        {
+            userId = $"USER_{Random.Range(0, 100):00}";
+            userIdText.text = userId;
+        }
+
+        PlayerPrefs.SetString("USER_ID", userIdText.text);
+        PhotonNetwork.NickName = userIdText.text;
+        PhotonNetwork.JoinRandomRoom();
     }
 }
