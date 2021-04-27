@@ -40,7 +40,10 @@ public class TankCtrl : MonoBehaviour
             tr.Translate(Vector3.forward * Time.deltaTime * speed * v);
             tr.Rotate(Vector3.up * Time.deltaTime * 100.0f * h);
 
-            Fire();
+            if (Input.GetMouseButtonDown(0))
+            {
+                Fire();
+            }
         }
     }
 
