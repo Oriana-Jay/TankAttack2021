@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float speed = 2000.0f;
+
     void Start()
     {
-        
+        GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * speed);        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
