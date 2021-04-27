@@ -88,10 +88,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel("BattleField");
         }
 
-        // // 통신이 가능한 주인공 캐릭터(탱크) 생성
-        // PhotonNetwork.Instantiate("Tank",
-        //                           new Vector3(0, 5.0f, 0),
-        //                           Quaternion.identity, 0);
+
     }
 
     public void OnLoginClick()
