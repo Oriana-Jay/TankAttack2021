@@ -20,4 +20,15 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();        
     }
 
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("Connected to Photoon Server!!!");
+        PhotonNetwork.JoinRandomRoom(); // 랜덤한 룸에 접속 시도
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log($"code={returnCode}, msg={message}");
+    }
+
 }
