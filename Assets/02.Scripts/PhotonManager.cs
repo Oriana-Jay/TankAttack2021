@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -16,6 +17,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     void Awake()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
+
         // 게임 버전 지정
         PhotonNetwork.GameVersion = gameVersion;
         // 유저명 지정
@@ -72,10 +75,23 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("방 입장 완료");
         Debug.Log(PhotonNetwork.CurrentRoom.Name);
 
-        // 통신이 가능한 주인공 캐릭터(탱크) 생성
-        PhotonNetwork.Instantiate("Tank",
-                                  new Vector3(0, 5.0f, 0),
-                                  Quaternion.identity, 0);
+        /* 유니티 SceneManager 통해서 씬을 로딩 방법
+
+        //통신을 잠시 끊음
+        PhotonNetwork.IsMessageQueueRunning = false;
+        //씬 로딩
+        SceneManager.LoadScene("BattleField");
+        */
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("BattleField");
+        }
+
+        // // 통신이 가능한 주인공 캐릭터(탱크) 생성
+        // PhotonNetwork.Instantiate("Tank",
+        //                           new Vector3(0, 5.0f, 0),
+        //                           Quaternion.identity, 0);
     }
 
     public void OnLoginClick()
