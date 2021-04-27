@@ -29,14 +29,21 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log($"code={returnCode}, msg={message}");
+
+        // 룸 속성을 설정
+        RoomOptions ro = new RoomOptions();
+        ro.IsOpen = true;
+        ro.IsVisible = true;
+        ro.MaxPlayers = 30;
+
         // 룸을 생성
-        PhotonNetwork.CreateRoom("My Room");
+        PhotonNetwork.CreateRoom("My Room", ro);
     }
 
     // 룸 생성 완료 콜백
     public override void OnCreatedRoom()
     {
-        Debug.Log("방생성 완료");
+        Debug.Log("방 생성 완료");
     }
 
     // 룸에 입장했을 때 호출되는 콜백함수
@@ -50,5 +57,4 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                                   new Vector3(0, 5.0f, 0),
                                   Quaternion.identity, 0);
     }
-
 }
