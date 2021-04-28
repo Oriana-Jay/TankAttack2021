@@ -55,10 +55,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         SetRoomInfo();
+        string msg = $"{newPlayer.NickName} is joined room";
+        
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         SetRoomInfo();
+        string msg = $"{otherPlayer.NickName} left room";
     }
 }
