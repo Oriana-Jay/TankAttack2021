@@ -89,6 +89,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
     }
 
+    // 룸 목록이 변경(갱신)될 때마다 호출되는 콜백함수
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        foreach (var room in roomList)
+        {
+            Debug.Log($"room name={room.Name}, ({room.PlayerCount}/{room.MaxPlayers})");
+        }
+    }
+
+
 #region UI_BUTTON_CALLBACK
     public void OnLoginClick()
     {
