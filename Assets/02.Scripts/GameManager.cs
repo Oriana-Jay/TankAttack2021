@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text roomNameText;
     public TMP_Text connectInfoText;
+    public TMP_Text messageText;
+
     public Button exitButton;
 
     void Awake()
@@ -55,13 +57,15 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         SetRoomInfo();
-        string msg = $"{newPlayer.NickName} is joined room";
+        string msg = $"\n<color=#00ff00>{newPlayer.NickName}</color> is joined room";
+        messageText.text += msg;
         
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         SetRoomInfo();
-        string msg = $"{otherPlayer.NickName} left room";
+        string msg = $"\n<color=#ff0000>{otherPlayer.NickName}</color> left room";
+        messageText.text += msg;
     }
 }
