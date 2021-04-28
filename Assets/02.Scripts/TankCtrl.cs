@@ -16,7 +16,7 @@ public class TankCtrl : MonoBehaviour
     public Transform cannonMesh;
 
     public AudioClip fireSfx;
-    private AudioSource audio;
+    private new AudioSource audio;
     
     void Start()
     {
