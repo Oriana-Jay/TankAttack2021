@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
+    public TMP_Text roomNameText;
+    public TMP_Text connectInfoText;
+    public Button exitButton;
+    
     void Awake()
     {
         //PhotonNetwork.IsMessageQueueRunning = true;
