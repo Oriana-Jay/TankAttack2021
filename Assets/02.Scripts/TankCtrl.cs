@@ -15,6 +15,8 @@ public class TankCtrl : MonoBehaviour
 
     public TMPro.TMP_Text userIdText;
 
+    public Transform cannonMesh;
+
     public AudioClip fireSfx;
     private new AudioSource audio;
     
