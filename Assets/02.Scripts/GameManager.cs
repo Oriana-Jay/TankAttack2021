@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text roomNameText;
     public TMP_Text connectInfoText;
     public Button exitButton;
-    
+
     void Awake()
     {
         //PhotonNetwork.IsMessageQueueRunning = true;
@@ -23,5 +25,40 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Tank",
                                   pos,
                                   Quaternion.identity, 0);        
+    }
+
+    void Start()
+    {
+        SetRoomInfo();
+    }
+
+    void SetRoomInfo()
+    {
+        Room currentRoom = PhotonNetwork.CurrentRoom;
+        roomNameText.text = currentRoom.Name;
+        connectInfoText.text = $"{currentRoom.PlayerCount}/{currentRoom.MaxPlayers}";
+    }
+
+    // 
+    public void OnExitClick()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    // CleanUp 끝난 후에 호출되는 콜백
+    public override void OnLeftRoom()
+    {
+        // Lobby 씬으로 되돌아 가기...
+        SceneManager.LoadScene("Lobby");
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        SetRoomInfo();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        SetRoomInfo();
     }
 }
