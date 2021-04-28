@@ -15,8 +15,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public Button exitButton;
 
+    // 싱글턴 변수
+    public static GameManager instance = null;
+
     void Awake()
     {
+        instance = this;
+        
         //PhotonNetwork.IsMessageQueueRunning = true;
 
         Vector3 pos = new Vector3(Random.Range(-150.0f, 150.0f),
@@ -65,7 +70,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         SetRoomInfo();
-        string msg = $"\n<color=#ff0000>{otherPlayer.NickName}</color> left room";
+        string msg = $"\n<color=#ff0000>{otherPlayer.NickName} left room";
         messageText.text += msg;
     }
 }

@@ -49,7 +49,7 @@ public class TankCtrl : MonoBehaviour
             // 포탄 발사 로직
             if (Input.GetMouseButtonDown(0))
             {
-                pv.RPC("Fire", RpcTarget.AllViaServer, null);
+                pv.RPC("Fire", RpcTarget.AllViaServer, pv.Owner.NickName);
             }
             // 포신 회전 설정
             float r = Input.GetAxis("Mouse ScrollWheel");
@@ -58,9 +58,10 @@ public class TankCtrl : MonoBehaviour
     }
 
     [PunRPC]
-    void Fire()
+    void Fire(string shooterName)
     {
         audio?.PlayOneShot(fireSfx);
-        Instantiate(cannon, firePos.position, firePos.rotation);
+        GameObject _cannon = Instantiate(cannon, firePos.position, firePos.rotation);
+        _cannon.GetComponent<Cannon>().shooter = shooterName;
     }
 }
