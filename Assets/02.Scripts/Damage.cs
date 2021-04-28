@@ -37,6 +37,10 @@ public class Damage : MonoBehaviour
         // 발사로직을 정지
         // 랜더러 컴포넌틀 비활성화
         GetComponent<BoxCollider>().enabled = false;
+        if (pv.IsMine)
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
         foreach(var mesh in renderers) mesh.enabled = false;
 
         // 5초 waitting
@@ -52,6 +56,10 @@ public class Damage : MonoBehaviour
         // 랜더러 컴포넌틀 활성화
         hp = 100;
         GetComponent<BoxCollider>().enabled = true;
+        if (pv.IsMine)
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+        }
         foreach(var mesh in renderers) mesh.enabled = true;
     }
 }
