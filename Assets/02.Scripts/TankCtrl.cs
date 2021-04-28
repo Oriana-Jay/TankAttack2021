@@ -13,7 +13,7 @@ public class TankCtrl : MonoBehaviour
     public Transform firePos;
     public GameObject cannon;
 
-    public Transform cannonMesh;
+    public TMPro.TMP_Text userIdText;
 
     public AudioClip fireSfx;
     private new AudioSource audio;
@@ -23,6 +23,8 @@ public class TankCtrl : MonoBehaviour
         tr = GetComponent<Transform>(); 
         pv = GetComponent<PhotonView>();
         audio = GetComponent<AudioSource>();
+
+        userIdText.text = pv.Owner.NickName;
 
         if (pv.IsMine)
         {
