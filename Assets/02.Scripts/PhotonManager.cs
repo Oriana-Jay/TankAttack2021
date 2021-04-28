@@ -24,7 +24,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         // 유저명 지정
         //PhotonNetwork.NickName = userId;
 
-        // 서버접속
+        // 서버접속 ping
         PhotonNetwork.ConnectUsingSettings();        
     }
 
@@ -87,10 +87,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("BattleField");
         }
-
-
     }
 
+#region UI_BUTTON_CALLBACK
     public void OnLoginClick()
     {
         if (string.IsNullOrEmpty(userIdText.text))
@@ -103,4 +102,22 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = userIdText.text;
         PhotonNetwork.JoinRandomRoom();
     }
+
+    public void OnMakeRoomClick()
+    {
+        // 룸 속성을 설정
+        RoomOptions ro = new RoomOptions();
+        ro.IsOpen = true;
+        ro.IsVisible = true;
+        ro.MaxPlayers = 30;
+
+        if (string.IsNullOrEmpty(roomNameText.text))
+        {
+            roomNameText.text = $"ROOM_{Random.Range(0, 100):000}";
+        }
+
+        // 룸을 생성
+        PhotonNetwork.CreateRoom(roomNameText.text, ro);
+    }    
+#endregion
 }
