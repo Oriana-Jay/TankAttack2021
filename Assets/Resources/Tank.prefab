@@ -1261,3 +1261,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  killList: {fileID: 0}

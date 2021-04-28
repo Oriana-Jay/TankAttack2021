@@ -7,6 +7,7 @@ public class Cannon : MonoBehaviour
     public GameObject expEffect;
     public float speed = 2000.0f;
     public string shooter;
+    public int actorNumber;
 
     void Start()
     {
@@ -19,5 +20,6 @@ public class Cannon : MonoBehaviour
                                      transform.position,
                                      Quaternion.identity);
         Destroy(obj, 3.0f);
+        Destroy(this.gameObject);
     }
 }
